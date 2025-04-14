@@ -1,7 +1,9 @@
-library(funspotr)
-
+#' Title or description of the function
+#'
+#' @export
+#' depends on funspotr
 unusedPackages <- function(pkgs){
-  funs <- spot_funs(rstudioapi::getActiveDocumentContext()$path)
+  funs <- funspotr::spot_funs(rstudioapi::getActiveDocumentContext()$path)
   diff <- setdiff(pkgs,unique(funs$pkgs))
   if(length(diff) == 0){
     print('No unused packages.')

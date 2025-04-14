@@ -1,3 +1,6 @@
+#' Title or description of the function
+#'
+#' @export
 
 metaGenerator <- function(output_path){
   # Load the rstudioapi package
