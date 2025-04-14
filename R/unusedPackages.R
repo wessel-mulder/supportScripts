@@ -1,7 +1,7 @@
 #' Title or description of the function
 #'
 #' @export
-#' depends on funspotr
+#' @importFrom funspotr spot_funs
 unusedPackages <- function(pkgs){
   funs <- funspotr::spot_funs(rstudioapi::getActiveDocumentContext()$path)
   diff <- setdiff(pkgs,unique(funs$pkgs))
