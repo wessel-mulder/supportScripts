@@ -1,0 +1,9 @@
+Package: supportScripts
+Type: Package
+Title: Support Scripts for Main Project
+Version: 0.1.0
+Author: Wessel Mulder
+Maintainer: bhr597@sund.ku.dk
+Description: A collection of functions for supporting my main project.
+Depends: R (>= 4.4.2), funspotr (>= 0.0.4)
+License: GNU
