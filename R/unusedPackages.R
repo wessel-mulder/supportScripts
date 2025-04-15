@@ -9,7 +9,8 @@
 #' @param pkgs A character vector of packages you want to check.
 #' @param file_path The path to the R script.
 #' @return A vector of unused packages.
-unusedPackages <- function(pkgs, file_path) {
+unusedPackages <- function(pkgs) {
+  file_path <- currentScript()
   code <- parse(file_path)
   funs <- codetools::findGlobals(code, merge = FALSE)$functions
 
