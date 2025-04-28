@@ -1,5 +1,6 @@
 #' Title or description of the function
 #'
+#' @importFrom rstudioapi getActiveDocumentContext
 #' @export
 
 metaGenerator <- function(output_path) {
