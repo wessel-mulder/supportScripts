@@ -4,25 +4,16 @@
 #' @export
 
 metaGenerator <- function(output_path) {
-  # Determine the script path
-  if (requireNamespace("rstudioapi", quietly = TRUE) && rstudioapi::isAvailable()) {
-    script_path <- tryCatch({
-      rstudioapi::getActiveDocumentContext()$path
-    }, error = function(e) NULL)
-    script_name <- if (!is.null(script_path)) basename(script_path) else "unknown_script.R"
-  } else if (!interactive()) {
-    # Get script path when running via Rscript
-    args <- commandArgs(trailingOnly = FALSE)
-    file_arg <- grep("^--file=", args, value = TRUE)
-    script_path <- if (length(file_arg) > 0) sub("^--file=", "", file_arg) else NULL
-    script_name <- if (!is.null(script_path)) basename(script_path) else "unknown_script.R"
-  } else {
-    script_path <- NULL
-    script_name <- "unknown_script.R"
-  }
-
   # Get the current date
   current_date <- Sys.Date()
+  print(current_date)
+  
+  if (requireNamespace("rstudioapi", quietly = TRUE) && rstudioapi::isAvailable()) {
+    this_file <- rstudioapi::getActiveDocumentContext()$path
+    script_name <- this_file
+      
+  }
+  
   
   # Metadata content
   text_content <- paste("Synthesized using", script_name, "on", current_date)
@@ -31,9 +22,7 @@ metaGenerator <- function(output_path) {
   writeLines(text_content, file.path(output_path, "metaData.txt"))
   
   # If script path is known and exists, copy it too
-  if (!is.null(script_path) && file.exists(script_path)) {
-    file.copy(script_path, file.path(output_path, 'script_used.R'))
-  }
+  file.copy(script_name, file.path(output_path, 'script_used.R'),overwrite =T)
   
   # Print confirmation
   cat(text_content, "\n")
